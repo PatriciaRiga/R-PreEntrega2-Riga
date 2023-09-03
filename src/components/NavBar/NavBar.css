@@ -1,0 +1,33 @@
+.ecoargento, .container {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ecoargento {
+    text-decoration: none;
+    color: darkgreen;
+}
+
+.botonNav {
+    margin: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: darkgreen;
+    cursor: pointer;
+    height: 40px;
+}
+
+.botonNav:hover,
+.botonNav:focus {
+    background-color: black;
+    color: white;
+    transition: 0.6s;
+}
+
+.ecoargento:hover {
+    color: rgb(1, 26, 8);
+    font-size: 1.6rem;
+    transition: 0.3s;
+}
