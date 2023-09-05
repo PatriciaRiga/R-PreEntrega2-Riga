@@ -54,7 +54,8 @@
     cursor: pointer;
 }
 
-.boton:hover {
+.boton:hover,
+.finCompra:hover {
     background-color: black;
     color: white;
     transition: 0.6s;
@@ -63,4 +64,18 @@
 .description {
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.finCompra {
+    display: inline-block;
+    padding: 10px;
+    background-color: lightgreen;
+    color: black; 
+    border: 2px solid darkgreen;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
