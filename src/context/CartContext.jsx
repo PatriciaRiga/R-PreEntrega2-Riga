@@ -6,24 +6,29 @@ export const CartContext = createContext({
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-
-    console.log(cart)
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const addItem = (item, quantity) => {
         if(!isInCart(item.id)) {
         setCart(prev => [...prev, {...item, quantity}])
+        setTotalPrice((prevTotalPrice) => prevTotalPrice + item.price * quantity)
         } else {
-        console.error('Este producto ya fue agregado al carrito')
+        console.error('Este producto ya fue agregado al carrito') //ACA QUIERO UNA NOTIFICACION, NO UN CONSOLE.ERROR
         }
     }
 
     const removeItem = (itemId) => {
-        const cartUpdated = cart.filter(prod => prod.id !== itemId)
-        setCart(cartUpdated)
+        const itemToRemove = cart.find((item) => item.id === itemId)
+        if (itemToRemove) {
+            setCart((prev) => prev.filter((item) => item.id !== itemId))
+            setTotalPrice((prevTotalPrice) => prevTotalPrice - itemToRemove.price * itemToRemove.quantity)
+        }
     }
 
     const clearCart = () => {
         setCart([])
+        getTotalQuantity(0);
+        setTotalPrice(0);
     }
 
     const isInCart = (itemId) => {
@@ -43,7 +48,7 @@ export const CartProvider = ({ children }) => {
     const totalQuantity = getTotalQuantity()
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, clearCart }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, totalPrice, clearCart }}>
             { children }
         </CartContext.Provider>
     )

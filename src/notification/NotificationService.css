@@ -1,0 +1,24 @@
+.notification {
+    position: absolute;
+    top: 300px;
+    right: 30px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.notification.success,
+.notification.error {
+    color: white;
+    border: 1px solid white;
+}
+
+.notification.success {
+    background-color: darkgreen;
+}
+
+.notification.error {
+    background-color: red;
+}
+
+  

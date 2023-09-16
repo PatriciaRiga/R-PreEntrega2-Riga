@@ -1,26 +1,30 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../../context/CartContext';
+import './CartItem.css'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
 
-const CartItem = ({ id, name, quantity, price }) => {
-  const { removeFromCart } = useContext(CartContext);
+const CartItem = ({ id, name, img, quantity, price }) => {
+  const { removeItem } = useContext(CartContext)
 
   const handleRemove = () => {
-    removeFromCart(id);
-  };
+    removeItem(id)
+  }
 
   return (
-    <div className="cart-item">
+    <div className="cartItem">
       <div>
         <h3>{name}</h3>
+        <img src={img} alt={name} />
         <p>Cantidad: {quantity}</p>
-        <p>Precio por unidad: ${price}</p>
+        <p className='precioUnidad'>Precio por unidad: ${price}</p>
       </div>
       <div>
-        <button onClick={handleRemove}>Eliminar</button>
+        <button className='boton' onClick={handleRemove}>Eliminar</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CartItem;
+// AGREGAR EL SUBTOTAL ABAJO DE PRECIO POR UNIDAD
+
+export default CartItem
 
