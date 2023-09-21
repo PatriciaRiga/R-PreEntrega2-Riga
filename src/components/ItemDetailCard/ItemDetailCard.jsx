@@ -14,7 +14,7 @@ const ItemDetailCard = ({ id, name, img, price, description, category, stock }) 
     const handleOnAdd = (quantity) => {
         setQuantityAdded(quantity)
         const item = {
-            id, name, price
+            id, name, img, price, category, stock, description
         }
         addItem(item, quantity)
         setNotification('success', `Se agregaron ${quantity} productos con el nombre ${name} al carrito`)

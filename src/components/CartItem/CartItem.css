@@ -9,9 +9,25 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-.precioUnidad {
+.fotos {
+    max-width: 100%;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.precioUnidad, .subtotal {
     font-weight: bold;
 }
 
+.subtotal {
+    font-size: larger;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+}

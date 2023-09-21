@@ -1,4 +1,5 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react"
+import { NotificationContext } from "../notification/NotificationService"
 
 export const CartContext = createContext({
     cart : []
@@ -8,12 +9,14 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [totalPrice, setTotalPrice] = useState(0);
 
+    const { setNotification } = useContext(NotificationContext)
+
     const addItem = (item, quantity) => {
         if(!isInCart(item.id)) {
         setCart(prev => [...prev, {...item, quantity}])
         setTotalPrice((prevTotalPrice) => prevTotalPrice + item.price * quantity)
         } else {
-        console.error('Este producto ya fue agregado al carrito') //ACA QUIERO UNA NOTIFICACION, NO UN CONSOLE.ERROR
+            setNotification('error', 'Este producto ya fue agregado al carrito') //ESTA NOTIFICACION NO ANDA
         }
     }
 

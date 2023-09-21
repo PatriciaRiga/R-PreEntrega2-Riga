@@ -11,7 +11,7 @@ const NavBar = () => {
                 <NavLink to={"/category/Accesorios"}><button className="botonNav">Accesorios</button></NavLink>
                 <NavLink to={"/category/Para el hogar"}><button className="botonNav">Para el hogar</button></NavLink>
                 <NavLink to={"/category/Urbanos"}><button className="botonNav">Urbanos</button></NavLink>
-                <CartWidget />
+                <NavLink to={"/Cart"}><CartWidget /></NavLink>
             </section>
         </nav>
     )

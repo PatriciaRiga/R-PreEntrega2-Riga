@@ -11,7 +11,7 @@ const Notification = ({ data }) => {
   )
 }
 
-const NotificationContext = createContext()
+export const NotificationContext = createContext()
 
 export const NotificationProvider = ({ children }) => {
   const [notificationData, setNotificationData] = useState({
