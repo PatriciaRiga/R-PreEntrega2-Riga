@@ -16,7 +16,7 @@ export const CartProvider = ({ children }) => {
         setCart(prev => [...prev, {...item, quantity}])
         setTotalPrice((prevTotalPrice) => prevTotalPrice + item.price * quantity)
         } else {
-            setNotification('error', 'Este producto ya fue agregado al carrito') //ESTA NOTIFICACION NO ANDA
+            setNotification('error', 'Este producto ya fue agregado al carrito') //ESTA NOTIFICACION NO ANDA, pero lo de no agregar el mismo producto repetido al carrito ANDA.
         }
     }
 
