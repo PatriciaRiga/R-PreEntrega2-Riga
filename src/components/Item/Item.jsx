@@ -1,6 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Item.css";
+import "./Item.css"
+import React from "react"
+import { Link } from "react-router-dom"
+
 
 const Item = ({ name, img, price, id }) => {
     return (

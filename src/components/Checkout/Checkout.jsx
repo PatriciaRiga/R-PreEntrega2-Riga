@@ -3,14 +3,14 @@ import { useState } from 'react'
 import { useCart } from "../../context/CartContext"
 import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
-import { useNavigate } from 'react-router-dom'
 import CheckoutForm from '../CheckoutForm/CheckoutForm'
 
 const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState('')
-    const { cart, totalPrice, clearCart } = useCart() 
-    const navigate = useNavigate()
+    const [formVisible, setFormVisible] = useState(true);
+
+    const { cart, totalPrice, clearCart } = useCart()
     const createOrder = async ({ name, phone, email }) => {
         try {
             setLoading(true)
@@ -19,41 +19,41 @@ const Checkout = () => {
                     name, phone, email
                 },
                 items: cart,
-                totalPrice 
+                totalPrice
             }
-    
+
             const batch = writeBatch(db)
             const outOfStock = []
-    
+
             const ids = cart.map(prod => prod.id)
             const productsRef = query(collection(db, 'products'), where(documentId(), 'in', ids))
-    
+
             const { docs } = await getDocs(productsRef)
-    
+
             docs.forEach(doc => {
                 const fields = doc.data()
                 const stockDb = fields.stock
-    
+
                 const productAddedToCart = cart.find(prod => prod.id === doc.id)
                 const prodQuantity = productAddedToCart?.quantity
-    
-                if(stockDb >= prodQuantity) {
+
+                if (stockDb >= prodQuantity) {
                     batch.update(doc.ref, { stock: stockDb - prodQuantity })
                 } else {
                     outOfStock.push({ id: doc.id, ...fields })
                 }
             })
-            
-            if(outOfStock.length === 0) {
+
+            if (outOfStock.length === 0) {
                 const orderRef = collection(db, 'orders')
-    
+
                 const { id: orderId } = await addDoc(orderRef, objOrder)
-    
+
                 batch.commit()
                 clearCart()
                 setOrderId(orderId)
-                navigate('/')
-                console.log('el numero de orden es: ' + orderId) 
+                setFormVisible(false)
+                console.log('el numero de orden es: ' + orderId)
             } else {
                 console.error('hay productos fuera de stock') //ESTO QUIERO QUE SEA UNA NOTIFICACION
             }
@@ -64,17 +64,22 @@ const Checkout = () => {
         }
     }
 
-    if(loading) {
+    if (loading) {
         return <h1>Generando orden de compra...</h1>
     }
 
     return (
         <>
-            <h1>Checkout</h1>
-            <CheckoutForm createOrder={createOrder}/>
-            {orderId && <h1>El ID de tu compra es: {orderId}</h1>}
+            <>
+                <h1>Checkout</h1>
+                {formVisible ? (
+                    <CheckoutForm createOrder={createOrder} setFormVisible={setFormVisible} />
+                ) : (
+                    <h1>El ID de tu compra es: {orderId}</h1>
+                )}
+            </>
         </>
     )
 }
 
-export default Checkout
+export default Checkout;

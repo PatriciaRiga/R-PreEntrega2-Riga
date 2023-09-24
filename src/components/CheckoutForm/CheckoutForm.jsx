@@ -5,21 +5,14 @@ const CheckoutForm = ({ createOrder }) => {
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-
-    // const handleConfirm = (event) => {
-    //     event.preventDefault()
-
-    //     const userData = {
-    //         name, phone, email
-    //     }
-
-    //     onConfirm(userData)
-    // }
     
     return (
         <>
             <h1>Formulario de contacto</h1>
-            <form onSubmit={() => createOrder({ name, phone, email })}>
+            <form onSubmit={(event) => {
+                event.preventDefault();
+                createOrder({ name, phone, email });
+            }}>
                 <label className="label">
                         Ingresá tu nombre
                     <input 
@@ -45,9 +38,6 @@ const CheckoutForm = ({ createOrder }) => {
                         onChange={({ target }) => setEmail(target.value)} />
                 </label>
                 <button>Generar orden de compra</button>
-                {/* <div className='label'>
-                    <button type='submit' className='boton'>Crear orden de compra</button>
-                </div> */}
             </form>
         </>
     )

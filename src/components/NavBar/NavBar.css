@@ -31,3 +31,16 @@
     font-size: 1.6rem;
     transition: 0.3s;
 }
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none;
+}

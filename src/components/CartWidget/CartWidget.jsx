@@ -1,4 +1,4 @@
-import classes from "./CartWidget.modules.css"
+import './CartWidget.css'
 import cart from './assets/shopping-svgrepo-com.svg'
 import { useCart } from "../../context/CartContext"
 
@@ -7,12 +7,10 @@ const CartWidget = () => {
 
     return (
         <>
-            {totalQuantity > 0 && (
-                <div className={classes.carrito}>
-                    <img src={cart} alt="carrito"/>
-                    { totalQuantity } 
-                </div>
-            )}
+            <div className="carrito">
+                <img src={cart} alt="carrito"/>
+                { totalQuantity }               
+            </div>
         </>
     )
 }
