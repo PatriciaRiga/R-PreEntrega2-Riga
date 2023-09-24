@@ -4,19 +4,19 @@ import { useCart } from "../../context/CartContext"
 import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
+import CheckoutForm from '../CheckoutForm/CheckoutForm'
 
 const Checkout = () => {
     const [loading, setLoading] = useState(false)
+    const [orderId, setOrderId] = useState('')
     const { cart, totalPrice, clearCart } = useCart() 
     const navigate = useNavigate()
-    const createOrder = async () => {
+    const createOrder = async ({ name, phone, email }) => {
         try {
             setLoading(true)
             const objOrder = {
                 buyer: {
-                    name: 'Patricia',
-                    phone: '1234546',
-                    email: 'patoriga51@gmail.com'
+                    name, phone, email
                 },
                 items: cart,
                 totalPrice 
@@ -51,8 +51,9 @@ const Checkout = () => {
     
                 batch.commit()
                 clearCart()
+                setOrderId(orderId)
                 navigate('/')
-                console.log('el numero de orden es: ' + orderId) //ESTO QUIERO QUE SEA UNA NOTIFICACION O UN DIV
+                console.log('el numero de orden es: ' + orderId) 
             } else {
                 console.error('hay productos fuera de stock') //ESTO QUIERO QUE SEA UNA NOTIFICACION
             }
@@ -70,8 +71,8 @@ const Checkout = () => {
     return (
         <>
             <h1>Checkout</h1>
-            <h2>Formulario</h2>
-            <button onClick={createOrder}>Generar orden de compra</button>
+            <CheckoutForm createOrder={createOrder}/>
+            {orderId && <h1>El ID de tu compra es: {orderId}</h1>}
         </>
     )
 }

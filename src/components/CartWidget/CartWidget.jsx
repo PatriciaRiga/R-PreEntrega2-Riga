@@ -1,4 +1,4 @@
-import classes from "./CartWidget.module.css"
+import classes from "./CartWidget.modules.css"
 import cart from './assets/shopping-svgrepo-com.svg'
 import { useCart } from "../../context/CartContext"
 
