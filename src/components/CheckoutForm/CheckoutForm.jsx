@@ -9,7 +9,7 @@ const CheckoutForm = ({ createOrder }) => {
     return (
         <>
             <h1>Formulario de contacto</h1>
-            <form onSubmit={(event) => {
+            <form className='formulario' onSubmit={(event) => {
                 event.preventDefault();
                 createOrder({ name, phone, email });
             }}>
@@ -37,7 +37,7 @@ const CheckoutForm = ({ createOrder }) => {
                         value={email}
                         onChange={({ target }) => setEmail(target.value)} />
                 </label>
-                <button>Generar orden de compra</button>
+                <button className='boton'>Generar orden de compra</button>
             </form>
         </>
     )

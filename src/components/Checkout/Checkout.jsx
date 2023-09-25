@@ -53,7 +53,6 @@ const Checkout = () => {
                 clearCart()
                 setOrderId(orderId)
                 setFormVisible(false)
-                console.log('el numero de orden es: ' + orderId)
             } else {
                 console.error('hay productos fuera de stock') //ESTO QUIERO QUE SEA UNA NOTIFICACION
             }
@@ -65,19 +64,18 @@ const Checkout = () => {
     }
 
     if (loading) {
-        return <h1>Generando orden de compra...</h1>
+        return (
+            <h1>Generando orden de compra...</h1>
+        )
     }
 
     return (
         <>
-            <>
-                <h1>Checkout</h1>
-                {formVisible ? (
-                    <CheckoutForm createOrder={createOrder} setFormVisible={setFormVisible} />
-                ) : (
-                    <h1>El ID de tu compra es: {orderId}</h1>
-                )}
-            </>
+            {formVisible ? (
+                <CheckoutForm createOrder={createOrder} setFormVisible={setFormVisible} />
+            ) : (
+                <h1>El ID de tu compra es: {orderId}</h1>
+            )}
         </>
     )
 }
