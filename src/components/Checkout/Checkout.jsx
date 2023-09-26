@@ -3,14 +3,17 @@ import { useState } from 'react'
 import { useCart } from "../../context/CartContext"
 import { collection, query, where, documentId, getDocs, writeBatch, addDoc } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
+import { useNotification } from '../../notification/NotificationService'
 import CheckoutForm from '../CheckoutForm/CheckoutForm'
 
 const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState('')
-    const [formVisible, setFormVisible] = useState(true);
-
+    const [formVisible, setFormVisible] = useState(true)
+   
+    const { setNotification } = useNotification()
     const { cart, totalPrice, clearCart } = useCart()
+
     const createOrder = async ({ name, phone, email }) => {
         try {
             setLoading(true)
@@ -54,10 +57,10 @@ const Checkout = () => {
                 setOrderId(orderId)
                 setFormVisible(false)
             } else {
-                console.error('hay productos fuera de stock') //ESTO QUIERO QUE SEA UNA NOTIFICACION
+                setNotification('error', 'hay productos fuera de stock')
             }
         } catch (error) {
-            console.log('ocurrio un error al obtener los datos' + error.message)
+            setNotification('error', 'ocurrio un error al obtener los datos')
         } finally {
             setLoading(false)
         }
