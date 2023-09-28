@@ -1,5 +1,4 @@
 import { createContext, useState, useContext } from "react"
-import { NotificationContext } from "../notification/NotificationService"
 
 export const CartContext = createContext({
     cart : []
@@ -7,17 +6,13 @@ export const CartContext = createContext({
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    const { setNotification } = useContext(NotificationContext)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const addItem = (item, quantity) => {
         if(!isInCart(item.id)) {
         setCart(prev => [...prev, {...item, quantity}])
         setTotalPrice((prevTotalPrice) => prevTotalPrice + item.price * quantity)
-        } else {
-            setNotification('error', 'Este producto ya fue agregado al carrito') //ESTA NOTIFICACION NO ANDA, pero lo de no agregar el mismo producto repetido al carrito ANDA.
-        }
+        } 
     }
 
     const removeItem = (itemId) => {

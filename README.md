@@ -43,12 +43,14 @@ Firebase proporciona una solución escalable y confiable para la gestión de dat
 
 ## Estructura de Carpetas
 
-- `src`: Es la carpeta contenedora de todo nuestro codigo dentro de la aplicacion de React y contiene todas las funcionalidades.
+- `public`: Esta carpeta almacena las imágenes de los productos.
 
-    - `components`: Es la carpeta que contiene todos los componentes de nuestra aplicacion (Ej: ItemListContainer, Carrito, Checkout, etc.)
+- `src`: Es la carpeta contenedora de todo el codigo dentro de la aplicacion de React y contiene todas las funcionalidades.
+
+    - `components`: Es la carpeta que contiene todos los componentes de la aplicacion (Ej: ItemListContainer, Carrito, Checkout, etc.)
 
     - `context`: se utiliza para gestionar el estado global y compartir datos y funciones entre componentes sin necesidad de pasar propiedades de manera explícita. En esta carpeta, se encuentra el archivo `CartContext.jsx`: Este contexto se utiliza para administrar el estado del carrito de compras. Almacena información sobre los productos agregados al carrito y proporciona funciones para agregar, eliminar y actualizar productos en el carrito.
 
-    - `notification`: Se utiliza para gestionar notificaciones y mensajes en tiempo real que se muestran a los usuarios. En esta carpeta se encuentra el archivo `NotificationService.js`: Este archivo contiene funciones de utilidad y lógica para enviar notificaciones y se utiliza en combinación con `NotificationProvider.js` para enviar notificaciones push a los dispositivos de los usuarios.
+    - `notification`: Se utiliza para gestionar notificaciones y mensajes en tiempo real. En esta carpeta se encuentra el archivo `NotificationService.js`, que contiene funciones de utilidad y lógica para enviar notificaciones y se utiliza en combinación con `NotificationProvider.js` para enviar notificaciones push a los dispositivos de los usuarios.
 
 - `App.js`: Es el componente donde inicia toda la aplicacion.
