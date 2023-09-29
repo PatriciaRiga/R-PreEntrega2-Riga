@@ -15,6 +15,11 @@ const CheckoutForm = ({ createOrder }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        if (!name || !phone || !email || !confirmarEmail) {
+            setNotification('error', 'Por favor, completa todos los campos del formulario.')
+            return
+        }
+
         if (email !== confirmarEmail) {
             setNotification('error', 'Los correos electrónicos no coinciden, volvé a intentar.')
             return
@@ -86,3 +91,4 @@ const CheckoutForm = ({ createOrder }) => {
 }
 
 export default CheckoutForm
+
